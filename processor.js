@@ -136,7 +136,6 @@ module.exports = function(proto) {
       console.log(command + ' ' + args.join(' '));
       var mencoderProc = spawn(command, args, options);
 
-
       if (mencoderProc.stderr && options.captureStderr) {
         mencoderProc.stderr.setEncoding('utf8');
       }
@@ -248,7 +247,7 @@ module.exports = function(proto) {
           if (!output.target) {
             outputArg = [];
           } else if (typeof output.target === 'string') {
-            outputArg = [output.target];
+            outputArg = ['-o',output.target];
           } else {
             outputArg = ['pipe:1'];
           }
