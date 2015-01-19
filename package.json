@@ -2,9 +2,9 @@
   "name": "node-mencoder",
   "version": "0.0.1",
   "description": "API to mencoder",
-  "main": "index.js",
+  "main": "mencoder.js",
   "scripts": {
-    "test": "make test"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/lesion/node-mencoder/issues"
   },
-  "homepage": "https://github.com/lesion/node-mencoder"
+  "homepage": "https://github.com/lesion/node-mencoder",
+  "devDependencies": {
+    "jsdoc": "^3.3.0-alpha13",
+    "mocha": "^2.1.0",
+    "should": "^4.6.0"
+  }
 }
