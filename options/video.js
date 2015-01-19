@@ -160,7 +160,7 @@ module.exports = function(proto) {
   proto.FPSOutput =
   proto.fps =
   proto.FPS = function(fps) {
-    this._currentOutput.video('-r', fps);
+    this._currentOutput.video('-ofps', fps);
     return this;
   };
 

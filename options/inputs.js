@@ -105,7 +105,7 @@ module.exports = function(proto) {
       throw new Error('No input specified');
     }
 
-    this._currentInput.options('-r', fps);
+    this._currentInput.options('-fps', fps);
     return this;
   };
 
