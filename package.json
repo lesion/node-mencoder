@@ -1,5 +1,5 @@
 {
-  "name": "node-mencoder",
+  "name": "mencoder",
   "version": "0.0.1",
   "description": "API to mencoder",
   "main": "mencoder.js",
