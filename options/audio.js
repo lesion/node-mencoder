@@ -21,7 +21,7 @@ module.exports = function(proto) {
   proto.noAudio = function() {
     this._currentOutput.audio.clear();
     this._currentOutput.audioFilters.clear();
-    this._currentOutput.audio('-an');
+    this._currentOutput.audio('-nosound');
 
     return this;
   };
@@ -39,7 +39,7 @@ module.exports = function(proto) {
    */
   proto.withAudioCodec =
   proto.audioCodec = function(codec) {
-    this._currentOutput.audio('-acodec', codec);
+    this._currentOutput.audio('-oac', codec);
 
     return this;
   };
