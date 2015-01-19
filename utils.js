@@ -321,6 +321,9 @@ var utils = module.exports = {
     var lastline = lines[lines.length - 2];
     var progress;
 
+    return;
+
+
     if (lastline) {
       progress = parseProgressLine(lastline);
     }

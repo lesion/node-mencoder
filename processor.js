@@ -477,7 +477,7 @@ module.exports = function(proto) {
             });
 
             outputStream.target.on('error', function(err) {
-              self.logger.debug('Output stream error, killing ffmpgeg process');
+              self.logger.debug('Output stream error, killing mencoder process');
               emitEnd(new Error('Output stream error: ' + err.message));
               mencoderProc.kill();
             });
@@ -486,6 +486,17 @@ module.exports = function(proto) {
             stdout = '';
             mencoderProc.stdout.on('data', function (data) {
               stdout += data;
+              console.log("=====" + data);
+              if (self.listeners('progress').length) {
+                var duration = 0;
+
+                if (self._ffprobeData && self._ffprobeData.format && self._ffprobeData.format.duration) {
+                  duration = Number(self._ffprobeData.format.duration);
+                }
+
+                utils.extractProgress(self, stdout, duration);
+              }
+
             });
           }
 
@@ -493,20 +504,12 @@ module.exports = function(proto) {
           self._codecDataSent = false;
           mencoderProc.stderr.on('data', function (data) {
             stderr += data;
+            console.log("****** " + data);
 
             if (!self._codecDataSent && self.listeners('codecData').length) {
               utils.extractCodecData(self, stderr);
             }
 
-            if (self.listeners('progress').length) {
-              var duration = 0;
-
-              if (self._ffprobeData && self._ffprobeData.format && self._ffprobeData.format.duration) {
-                duration = Number(self._ffprobeData.format.duration);
-              }
-
-              utils.extractProgress(self, stderr, duration);
-            }
           });
         },
 
