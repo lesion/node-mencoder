@@ -49,6 +49,7 @@ MencoderCommand.prototype.addInput = function(){
 };
 require('./options/inputs')(MencoderCommand.prototype);
 require('./options/output')(MencoderCommand.prototype);
+require('./options/video')(MencoderCommand.prototype);
 require('./processor')(MencoderCommand.prototype);
 require('./recipes')(MencoderCommand.prototype);
 require('./capabilities')(MencoderCommand.prototype);

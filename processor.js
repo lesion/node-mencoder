@@ -224,7 +224,7 @@ module.exports = function(proto) {
           // For each input, add input options, then '-i <source>'
           return args.concat(
             input.options.get(),
-            [source]
+            ['mf://' + source]
           );
         }, []),
 
