@@ -14,17 +14,29 @@ var EventEmitter = require('events').EventEmitter;
  * @param {Number} [options.niceness=0] mencoder process niceness, ignored on Windows
  * @param {Number} [options.timeout=<no-timeout>] mencoder processing timeout in seconds
  */
-function MencoderCommand(options){
+function MencoderCommand(input,options){
   // Make 'new' optional
-  if (! this instanceof MencoderCommand) {
-    return new MencoderCommand(options);
+  if (! (this instanceof MencoderCommand)) {
+    return new MencoderCommand(input,options);
   }
 
   EventEmitter.call(this);
 
-  options = options || {};
+  if (typeof input === 'object' && !('readable' in input)) {
+    // Options object passed directly
+    options = input;
+  } else {
+    // Input passed first
+    options = options || {};
+    options.source = input;
+  }
 
+  // Add input if present
   this._inputs = [];
+  if (options.source) {
+    this.input(options.source);
+  }
+
   this._outputs = [];
   this.output();
 
@@ -52,7 +64,19 @@ require('./options/output')(MencoderCommand.prototype);
 require('./options/video')(MencoderCommand.prototype);
 require('./options/misc')(MencoderCommand.prototype);
 require('./processor')(MencoderCommand.prototype);
-require('./recipes')(MencoderCommand.prototype);
 require('./capabilities')(MencoderCommand.prototype);
+
+
+/* Add ffprobe methods */
+
+require('./ffprobe')(MencoderCommand.prototype);
+
+MencoderCommand.ffprobe = function(file, callback) {
+  (new MencoderCommand(file)).ffprobe(callback);
+};
+
+
+
+require('./recipes')(MencoderCommand.prototype);
 
 module.exports = MencoderCommand;
