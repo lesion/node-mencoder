@@ -254,9 +254,9 @@ module.exports = function(proto) {
 
           return args.concat(
             output.audio.get(),
-            audioFilters.length ? ['-filter:a', audioFilters.join(',')] : [],
+            audioFilters.length ? ['-af', audioFilters.join(',')] : [],
             output.video.get(),
-            videoFilters.length ? ['-filter:v', videoFilters.join(',')] : [],
+            videoFilters.length ? ['-vf', videoFilters.join(',')] : [],
             output.options.get(),
             outputArg
           );
