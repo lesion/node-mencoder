@@ -125,7 +125,7 @@ module.exports = function(proto) {
   proto.withOutputFormat =
   proto.outputFormat =
   proto.format = function(format) {
-    this._currentOutput.options('-f', format);
+    this._currentOutput.options('-of', format);
     return this;
   };
 
